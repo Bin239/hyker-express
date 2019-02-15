@@ -1,16 +1,16 @@
 const express = require(("express"));
 const router = express.Router();
 
-const Comment = require ("../models/comment")
 
     router.get("/", async (req, res, next) => {
 
         try {
-            const allComments = await Comment.find();
+            const allTrail = await Trail.find();
+            console.log(allTrail)
 
             res.json({
                 status: 200,
-                data: allComments
+                data: allTrail
             })
         }catch (err){
             res.send(err)
@@ -20,11 +20,11 @@ const Comment = require ("../models/comment")
 
 router.post("/", async (req, res) => {
     try{
-        const createdComment = await Comment.create(req.body);
+        const createdTrail = await Trail.create(req.body);
 
         res.json({
             status: 200,
-            data: createdComment
+            data: createdTrail
         })
     }catch(err){
         res.send(err);
@@ -33,10 +33,10 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async(req, res, next) => {
     try {
-        const foundComment = await Comment.findById(req.params.id);
+        const foundTrail = await Trail.findById(req.params.id);
         res.json({
             status: 200,
-            data: foundComment
+            data: foundTrail
         })
     }catch (err){
         res.send(err)
@@ -45,10 +45,10 @@ router.get("/:id", async(req, res, next) => {
 
 router.put("/:id", async(req, res) => {
     try {
-        const updateComment = await Comment.findByIdAndUpdate(req.params.id, req.body,{new: true} )
+        const updateTrail = await Trail.findByIdAndUpdate(req.params.id, req.body,{new: true} )
         res.json({
             status: 200,
-            data: updateComment
+            data: updateTrail
         });
     }catch(err) {
         res.send(err)
@@ -57,10 +57,10 @@ router.put("/:id", async(req, res) => {
 
 router.delete("/:id", async (req, res) => {
     try {
-        const deletedComment = await Comment.findByIdAndRemove(req.params.id);
+        const deletedTrails = await Trail.findByIdAndRemove(req.params.id);
         res.json({
             status: 200,
-            data: deletedComment
+            data: deletedTrails
         })
     }catch (err) {
         res.send(err)
